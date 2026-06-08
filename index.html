@@ -1,736 +1,661 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>你的名字 — 个人刊物</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Noto+Serif+SC:wght@300;400;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>赵金桥 — 机械工程师</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-    :root {
-      --black: #0d0d0d;
-      --white: #f7f5f0;
-      --accent: #c8402a;
-      --gray: #6b6b6b;
-      --light: #e8e5de;
-      --display: 'Playfair Display', serif;
-      --body: 'Noto Serif SC', serif;
-      --mono: 'DM Mono', monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--white);
-      color: var(--black);
-      font-family: var(--body);
-      font-size: 15px;
-      line-height: 1.75;
-      -webkit-font-smoothing: antialiased;
+    :root{
+      --white:#ffffff;
+      --off:#f8f8f6;
+      --black:#111110;
+      --ink:#1a1a18;
+      --muted:#6b6b68;
+      --faint:#d4d4d0;
+      --rule:#e4e4e0;
+      --accent:#1f5fa6;       /* engineering blue */
+      --accent-light:#eef3fa;
+      --mono:'IBM Plex Mono',monospace;
+      --sans:'IBM Plex Sans SC','Noto Serif SC',sans-serif;
+      --serif:'Noto Serif SC',serif;
+      --max:960px;
     }
 
-    /* ── MASTHEAD ── */
-    .masthead { border-bottom: 3px solid var(--black); }
-    .masthead-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.6rem 2.5rem;
-      border-bottom: 1px solid var(--black);
-      font-family: var(--mono);
-      font-size: 10px;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      color: var(--gray);
+    html{scroll-behavior:smooth;font-size:16px}
+    body{background:var(--white);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.75}
+
+    /* ─── NAV ─── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      background:rgba(255,255,255,0.94);backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--rule);
     }
-    .masthead-main {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      padding: 1.5rem 2.5rem;
+    .nav-inner{
+      max-width:var(--max);margin:0 auto;padding:0 2rem;
+      height:52px;display:flex;align-items:center;gap:2rem;
     }
-    .masthead-nav { display: flex; gap: 2rem; list-style: none; }
-    .masthead-nav a {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--black);
-      transition: color 0.2s;
+    .nav-logo{
+      font-family:var(--mono);font-size:13px;font-weight:500;
+      letter-spacing:0.04em;color:var(--black);text-decoration:none;
+      display:flex;align-items:center;gap:10px;
     }
-    .masthead-nav a:hover { color: var(--accent); }
-    .masthead-title { text-align: center; }
-    .masthead-title h1 {
-      font-family: var(--display);
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 900;
-      line-height: 0.9;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      animation: fadeSlide 0.7s ease both 0.05s;
+    .nav-logo-mark{
+      width:28px;height:28px;border:1.5px solid var(--accent);
+      display:flex;align-items:center;justify-content:center;
+      font-family:var(--mono);font-size:10px;font-weight:500;color:var(--accent);
+      letter-spacing:0;flex-shrink:0;
     }
-    .masthead-subtitle {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.25em;
-      color: var(--gray);
-      margin-top: 0.5rem;
-      text-transform: uppercase;
+    .nav-links{display:flex;gap:0;margin-left:auto;list-style:none}
+    .nav-links a{
+      font-family:var(--mono);font-size:11px;font-weight:300;
+      letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;
+      color:var(--muted);padding:0 1rem;height:52px;
+      display:flex;align-items:center;border-bottom:2px solid transparent;
+      transition:color 0.18s,border-color 0.18s;
     }
-    .masthead-right {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
+    .nav-links a:hover{color:var(--black);border-bottom-color:var(--accent)}
+
+    /* ─── SECTION WRAPPER ─── */
+    .section{max-width:var(--max);margin:0 auto;padding:5rem 2rem}
+    .section+.section{border-top:1px solid var(--rule)}
+
+    /* ─── SECTION HEADER ─── */
+    .sec-label{
+      font-family:var(--mono);font-size:10px;font-weight:400;
+      letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);
+      display:flex;align-items:center;gap:10px;margin-bottom:2.5rem;
     }
-    .issue-badge {
-      background: var(--accent);
-      color: var(--white);
-      font-family: var(--mono);
-      font-size: 9px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      padding: 6px 10px;
-      line-height: 1.6;
+    .sec-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+    /* ─── HERO ─── */
+    #about{padding-top:8rem}
+    .hero-grid{
+      display:grid;grid-template-columns:1fr 260px;
+      gap:4rem;align-items:start;
+    }
+    .hero-spec{
+      font-family:var(--mono);font-size:10px;font-weight:300;
+      letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);
+      margin-bottom:1.2rem;
+      opacity:0;animation:fadeUp 0.6s ease forwards 0.05s;
+    }
+    .hero-name{
+      font-family:var(--mono);font-size:clamp(2rem,4vw,3rem);font-weight:500;
+      line-height:1.1;letter-spacing:-0.01em;color:var(--black);
+      margin-bottom:0.5rem;
+      opacity:0;animation:fadeUp 0.6s ease forwards 0.15s;
+    }
+    .hero-role{
+      font-family:var(--mono);font-size:13px;font-weight:300;
+      letter-spacing:0.08em;color:var(--accent);margin-bottom:2rem;
+      opacity:0;animation:fadeUp 0.6s ease forwards 0.25s;
+    }
+    .hero-bio{
+      font-family:var(--serif);font-size:15px;line-height:1.9;
+      color:#444;max-width:520px;
+      opacity:0;animation:fadeUp 0.6s ease forwards 0.35s;
+    }
+    .hero-skills{
+      margin-top:2.5rem;display:flex;flex-wrap:wrap;gap:6px;
+      opacity:0;animation:fadeUp 0.6s ease forwards 0.45s;
+    }
+    .skill-tag{
+      font-family:var(--mono);font-size:10px;font-weight:400;
+      letter-spacing:0.08em;border:1px solid var(--faint);
+      padding:4px 10px;color:var(--muted);background:var(--off);
+    }
+    .skill-tag.primary{
+      background:var(--accent-light);border-color:#b8cfe8;color:var(--accent);
     }
 
-    /* ── HERO ── */
-    .hero {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      border-bottom: 2px solid var(--black);
+    /* hero sidebar — stats/info card */
+    .hero-card{
+      border:1px solid var(--rule);padding:1.5rem;background:var(--off);
+      opacity:0;animation:fadeUp 0.6s ease forwards 0.3s;
     }
-    .hero-left {
-      padding: 4rem 3rem 4rem 2.5rem;
-      border-right: 1px solid var(--black);
+    .hcard-row{
+      display:flex;justify-content:space-between;align-items:baseline;
+      padding:0.75rem 0;border-bottom:1px solid var(--rule);
     }
-    .hero-eyebrow {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      animation: fadeSlide 0.7s ease both 0.1s;
+    .hcard-row:last-child{border-bottom:none}
+    .hcard-key{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
+    .hcard-val{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--black)}
+
+    /* ─── PROJECTS ─── */
+    .projects-list{display:flex;flex-direction:column;gap:0}
+    .project-item{
+      display:grid;grid-template-columns:80px 1fr auto;
+      gap:1.5rem;align-items:start;
+      padding:1.8rem 0;border-bottom:1px solid var(--rule);
+      text-decoration:none;color:inherit;
+      transition:background 0.15s;
     }
-    .hero-headline {
-      font-family: var(--display);
-      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-      animation: fadeSlide 0.7s ease both 0.2s;
+    .project-item:first-child{border-top:1px solid var(--rule)}
+    .project-item:hover{background:var(--off);margin:0 -1.5rem;padding-left:1.5rem;padding-right:1.5rem}
+    .proj-index{
+      font-family:var(--mono);font-size:10px;font-weight:300;
+      letter-spacing:0.1em;color:var(--faint);padding-top:3px;
     }
-    .hero-headline em {
-      font-style: italic;
-      font-weight: 700;
-      color: var(--accent);
+    .proj-body{}
+    .proj-cat{
+      font-family:var(--mono);font-size:9px;font-weight:400;
+      letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);
+      margin-bottom:0.35rem;
     }
-    .hero-body {
-      font-size: 15px;
-      line-height: 1.9;
-      color: #333;
-      max-width: 420px;
-      animation: fadeSlide 0.7s ease both 0.35s;
+    .proj-title{
+      font-size:15px;font-weight:500;color:var(--black);
+      margin-bottom:0.4rem;line-height:1.4;
     }
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 2.5rem;
-      animation: fadeSlide 0.7s ease both 0.5s;
+    .proj-desc{font-family:var(--serif);font-size:13px;color:var(--muted);line-height:1.7}
+    .proj-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:0.8rem}
+    .proj-tag{
+      font-family:var(--mono);font-size:9px;letter-spacing:0.06em;
+      border:1px solid var(--faint);padding:2px 7px;color:var(--muted);
     }
-    .tag {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid var(--black);
-      padding: 4px 10px;
+    .proj-meta{
+      font-family:var(--mono);font-size:10px;font-weight:300;
+      letter-spacing:0.06em;color:var(--muted);white-space:nowrap;
+      padding-top:3px;text-align:right;
     }
-    .tag.accent { background: var(--black); color: var(--white); }
-    .hero-right { display: flex; flex-direction: column; }
-    .hero-photo {
-      flex: 1;
-      background: #1a1a1a;
-      min-height: 320px;
-      display: flex;
-      align-items: flex-end;
-      padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
+    .proj-meta span{display:block;margin-top:4px;color:var(--faint)}
+
+    /* ─── WRITING / 文章 ─── */
+    .posts-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      gap:0;border:1px solid var(--rule);
     }
-    .hero-photo-ph {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      color: #444;
-      text-transform: uppercase;
+    .post-card{
+      padding:1.6rem;border-right:1px solid var(--rule);
+      text-decoration:none;color:inherit;display:block;
+      transition:background 0.15s;position:relative;
     }
-    .hero-photo-ph span:first-child { font-size: 2.5rem; color: #333; }
-    .hero-photo-caption {
-      position: relative; z-index: 1;
-      font-family: var(--mono); font-size: 9px;
-      letter-spacing: 0.1em; color: #555; text-transform: uppercase;
+    .post-card:last-child{border-right:none}
+    .post-card:hover{background:var(--off)}
+    .post-card-type{
+      font-family:var(--mono);font-size:9px;font-weight:400;
+      letter-spacing:0.14em;text-transform:uppercase;
+      color:var(--accent);margin-bottom:0.7rem;
     }
-    .hero-stat {
-      padding: 1.8rem 2rem;
-      border-top: 1px solid var(--black);
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
+    .post-card-title{
+      font-size:14px;font-weight:500;color:var(--black);
+      line-height:1.45;margin-bottom:0.6rem;
     }
-    .hero-stat-num {
-      font-family: var(--display);
-      font-size: 3rem;
-      font-weight: 900;
-      line-height: 1;
-      color: var(--accent);
+    .post-card-excerpt{
+      font-family:var(--serif);font-size:12px;color:var(--muted);
+      line-height:1.7;
     }
-    .hero-stat-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      color: var(--gray);
-      text-transform: uppercase;
+    .post-card-date{
+      font-family:var(--mono);font-size:9px;font-weight:300;
+      letter-spacing:0.08em;color:var(--faint);
+      margin-top:1rem;
+    }
+    .post-card-arrow{
+      position:absolute;bottom:1.4rem;right:1.4rem;
+      font-size:13px;color:var(--faint);transition:transform 0.15s,color 0.15s;
+    }
+    .post-card:hover .post-card-arrow{transform:translate(3px,-3px);color:var(--accent)}
+
+    /* featured post row */
+    .post-featured-row{
+      border-bottom:1px solid var(--rule);display:grid;
+      grid-template-columns:1fr 200px;
+    }
+    .pfr-body{padding:1.8rem;border-right:1px solid var(--rule)}
+    .pfr-label{
+      font-family:var(--mono);font-size:9px;letter-spacing:0.16em;
+      text-transform:uppercase;background:var(--accent);color:#fff;
+      padding:2px 8px;display:inline-block;margin-bottom:0.8rem;
+    }
+    .pfr-title{font-size:16px;font-weight:500;color:var(--black);line-height:1.4;margin-bottom:0.6rem}
+    .pfr-excerpt{font-family:var(--serif);font-size:13px;color:var(--muted);line-height:1.75;max-width:480px}
+    .pfr-read{
+      display:inline-block;margin-top:1rem;font-family:var(--mono);
+      font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+      text-decoration:none;color:var(--accent);
+      border-bottom:1px solid var(--accent);padding-bottom:1px;
+    }
+    .pfr-meta{padding:1.8rem;display:flex;flex-direction:column;gap:1.2rem}
+    .pfr-meta-item .mk{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+    .pfr-meta-item .mv{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--black)}
+
+    /* ─── GALLERY ─── */
+    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+    .gallery-cell{
+      aspect-ratio:1;background:var(--off);overflow:hidden;
+      position:relative;cursor:pointer;
+    }
+    .gallery-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease,filter 0.3s}
+    .gallery-cell:hover img{transform:scale(1.04);filter:brightness(1.05)}
+    .gallery-ph{
+      position:absolute;inset:0;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:6px;
+      font-family:var(--mono);font-size:9px;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--faint);
+    }
+    .gallery-ph svg{opacity:0.25}
+    .gallery-num{
+      position:absolute;top:8px;left:8px;font-family:var(--mono);
+      font-size:9px;letter-spacing:0.06em;color:rgba(255,255,255,0.7);
+      background:rgba(0,0,0,0.35);padding:2px 5px;
+    }
+    .gallery-wide{grid-column:span 2;aspect-ratio:2/1}
+    .gallery-note{
+      font-family:var(--mono);font-size:10px;font-weight:300;
+      letter-spacing:0.08em;color:var(--muted);margin-top:1rem;
     }
 
-    /* ── SECTION RULE ── */
-    .section-rule {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 2.5rem;
-      border-bottom: 2px solid var(--black);
-      background: var(--black);
-      color: var(--white);
+    /* ─── VIDEO ─── */
+    .video-row{display:grid;grid-template-columns:1fr 240px;border:1px solid var(--rule)}
+    .video-main{padding:2rem;border-right:1px solid var(--rule)}
+    .video-embed{width:100%;aspect-ratio:16/9;background:#0a0a0a;position:relative;overflow:hidden;margin-bottom:1rem}
+    .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+    .video-ph{
+      position:absolute;inset:0;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:10px;
+      background:linear-gradient(160deg,#0f1923 0%,#0a0f14 100%);
     }
-    .section-rule-label {
-      font-family: var(--display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      font-style: italic;
+    .video-ph-play{
+      width:48px;height:48px;border:1px solid #2a3a4a;
+      display:flex;align-items:center;justify-content:center;
+      color:#3a5a7a;font-size:16px;transition:border-color 0.2s,color 0.2s;
     }
-    .section-rule-line { flex: 1; height: 1px; background: #333; }
-    .section-rule-num {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      color: #666;
-    }
+    .video-ph:hover .video-ph-play{border-color:#4a8aba;color:#4a8aba}
+    .video-ph p{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#2a3a4a}
+    .video-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px}
+    .video-meta-txt{font-family:var(--mono);font-size:10px;font-weight:300;letter-spacing:0.06em;color:var(--muted)}
+    .video-sidebar{padding:1.5rem;display:flex;flex-direction:column;gap:0}
+    .video-side-item{padding:1rem 0;border-bottom:1px solid var(--rule);cursor:pointer;transition:opacity 0.15s}
+    .video-side-item:hover{opacity:0.55}
+    .video-side-item:last-child{border-bottom:none}
+    .vsi-num{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;color:var(--accent);margin-bottom:3px}
+    .vsi-title{font-size:12px;font-weight:500;color:var(--black);line-height:1.4;margin-bottom:3px}
+    .vsi-date{font-family:var(--mono);font-size:9px;font-weight:300;color:var(--faint)}
 
-    /* ── POSTS ── */
-    .posts-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      border-bottom: 2px solid var(--black);
+    /* ─── CONTACT ─── */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+    .contact-intro{font-family:var(--serif);font-size:15px;line-height:1.9;color:#444;margin-bottom:2rem}
+    .contact-links{display:flex;flex-direction:column;gap:0}
+    .contact-link{
+      display:flex;align-items:center;gap:1rem;text-decoration:none;
+      color:var(--ink);padding:0.9rem 0;border-bottom:1px solid var(--rule);
+      transition:border-color 0.15s;
     }
-    .post-featured {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      border-bottom: 1px solid var(--black);
-    }
-    .post-featured-body {
-      padding: 3rem 2.5rem;
-      border-right: 1px solid var(--black);
-    }
-    .post-featured-tag {
-      display: inline-block;
-      background: var(--accent);
-      color: var(--white);
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      margin-bottom: 1.2rem;
-    }
-    .post-featured-title {
-      font-family: var(--display);
-      font-size: 2.2rem;
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-    }
-    .post-featured-excerpt {
-      font-size: 14px;
-      color: #444;
-      line-height: 1.9;
-      max-width: 480px;
-    }
-    .post-featured-read {
-      display: inline-block;
-      margin-top: 2rem;
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--black);
-      border-bottom: 1.5px solid var(--black);
-      padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .post-featured-read:hover { color: var(--accent); border-color: var(--accent); }
-    .post-featured-meta { padding: 3rem 2rem; display: flex; flex-direction: column; gap: 2rem; }
-    .meta-label {
-      font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--gray);
-      border-bottom: 1px solid var(--light); padding-bottom: 6px; margin-bottom: 6px;
-    }
-    .meta-value { font-family: var(--display); font-size: 1rem; font-weight: 700; }
+    .contact-link:first-child{border-top:1px solid var(--rule)}
+    .contact-link:hover{border-bottom-color:var(--accent)}
+    .contact-link:hover .cl-label{color:var(--accent)}
+    .cl-platform{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);width:60px;flex-shrink:0}
+    .cl-label{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--black);transition:color 0.15s}
+    .cl-arrow{margin-left:auto;color:var(--faint);font-size:11px;transition:transform 0.15s}
+    .contact-link:hover .cl-arrow{transform:translateX(3px);color:var(--accent)}
 
-    .post-card {
-      padding: 2.5rem 2rem;
-      border-right: 1px solid var(--black);
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      position: relative;
-      transition: background 0.2s;
-    }
-    .post-card:last-child { border-right: none; }
-    .post-card:hover { background: var(--black); color: var(--white); }
-    .post-card-issue {
-      font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 1rem; transition: color 0.2s;
-    }
-    .post-card:hover .post-card-issue { color: #e08070; }
-    .post-card-title {
-      font-family: var(--display);
-      font-size: 1.25rem; font-weight: 700; line-height: 1.25; margin-bottom: 1rem;
-    }
-    .post-card-excerpt {
-      font-size: 13px; color: var(--gray); line-height: 1.8; transition: color 0.2s;
-    }
-    .post-card:hover .post-card-excerpt { color: #aaa; }
-    .post-card-arrow {
-      position: absolute; bottom: 2rem; right: 2rem;
-      font-size: 1.2rem; transition: transform 0.2s;
-    }
-    .post-card:hover .post-card-arrow { transform: translate(3px, -3px); }
+    /* spec block on right of contact */
+    .spec-block{border:1px solid var(--rule);padding:1.5rem}
+    .spec-title{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--rule)}
+    .spec-row{display:flex;justify-content:space-between;align-items:baseline;padding:0.55rem 0;border-bottom:1px solid var(--rule)}
+    .spec-row:last-child{border-bottom:none}
+    .spec-k{font-family:var(--mono);font-size:10px;font-weight:300;letter-spacing:0.06em;color:var(--muted)}
+    .spec-v{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--black)}
+    .spec-v.ok::before{content:'● ';color:#2a7a4a;font-size:8px}
 
-    /* ── GALLERY ── */
-    .gallery-section { border-bottom: 2px solid var(--black); }
-    .gallery-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
-    .gallery-cell {
-      aspect-ratio: 3/4;
-      background: var(--light);
-      border-right: 1px solid var(--black);
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
+    /* ─── FOOTER ─── */
+    footer{
+      border-top:1px solid var(--rule);padding:1.5rem 2rem;
+      max-width:var(--max);margin:0 auto;
+      display:flex;justify-content:space-between;align-items:center;
     }
-    .gallery-cell:last-child { border-right: none; }
-    .gallery-cell img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      transition: transform 0.6s ease, filter 0.3s;
-      filter: grayscale(20%);
-    }
-    .gallery-cell:hover img { transform: scale(1.06); filter: grayscale(0%); }
-    .gallery-cell-ph {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
-      color: #aaa; text-transform: uppercase; background: #e0ddd6; transition: background 0.3s;
-    }
-    .gallery-cell:hover .gallery-cell-ph { background: #d4d0c8; }
-    .gallery-cell-ph .ph-icon { font-size: 2rem; color: #ccc; }
-    .gallery-cell-num {
-      position: absolute; top: 1rem; left: 1rem;
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
-      color: #888; background: rgba(247,245,240,0.8); padding: 2px 6px;
-    }
-    .gallery-wide { grid-column: span 2; aspect-ratio: 16/9; }
+    .footer-id{font-family:var(--mono);font-size:10px;font-weight:300;letter-spacing:0.1em;color:var(--muted)}
+    .footer-back{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);text-decoration:none;transition:color 0.15s}
+    .footer-back:hover{color:var(--accent)}
 
-    /* ── VIDEO ── */
-    .video-section { border-bottom: 2px solid var(--black); }
-    .video-inner { display: grid; grid-template-columns: 2fr 1fr; }
-    .video-main { border-right: 1px solid var(--black); padding: 3rem 2.5rem; }
-    .video-embed-wrap {
-      width: 100%; aspect-ratio: 16/9;
-      background: var(--black); position: relative; overflow: hidden; margin-bottom: 1.5rem;
-    }
-    .video-embed-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
-    .video-embed-ph {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 12px; cursor: pointer;
-      background: repeating-linear-gradient(-45deg,#111 0,#111 10px,#0d0d0d 10px,#0d0d0d 20px);
-    }
-    .video-embed-ph:hover { background: #1a1a1a; }
-    .play-circle {
-      width: 64px; height: 64px; border: 2px solid #444; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: #666; font-size: 20px; transition: border-color 0.2s, color 0.2s;
-    }
-    .video-embed-ph:hover .play-circle { border-color: var(--accent); color: var(--accent); }
-    .video-embed-ph p {
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
-      color: #555; text-transform: uppercase;
-    }
-    .video-main-title { font-family: var(--display); font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .video-main-meta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--gray); text-transform: uppercase; }
-    .video-sidebar { padding: 2rem; display: flex; flex-direction: column; }
-    .video-side-item {
-      padding: 1.4rem 0; border-bottom: 1px solid var(--light);
-      cursor: pointer; transition: opacity 0.2s;
-    }
-    .video-side-item:hover { opacity: 0.6; }
-    .video-side-num { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 4px; }
-    .video-side-title { font-family: var(--display); font-size: 0.95rem; font-weight: 700; line-height: 1.3; margin-bottom: 4px; }
-    .video-side-date { font-family: var(--mono); font-size: 9px; color: var(--gray); letter-spacing: 0.08em; }
+    /* ─── UTILS ─── */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
-    /* ── CONTACT ── */
-    .contact-section {
-      display: grid; grid-template-columns: 1fr 1fr; border-bottom: 2px solid var(--black);
-    }
-    .contact-left { padding: 4rem 3rem 4rem 2.5rem; border-right: 1px solid var(--black); }
-    .contact-heading {
-      font-family: var(--display); font-size: clamp(2rem,4vw,3.2rem);
-      font-weight: 900; font-style: italic; line-height: 1.1; margin-bottom: 2.5rem;
-    }
-    .contact-links { display: flex; flex-direction: column; gap: 0; }
-    .contact-link {
-      display: flex; align-items: center; gap: 1rem;
-      text-decoration: none; color: var(--black); font-size: 14px;
-      border-bottom: 1px solid var(--light); padding: 1.2rem 0;
-      transition: border-color 0.2s;
-    }
-    .contact-link:hover { border-color: var(--black); }
-    .contact-link:hover .clink-label { color: var(--accent); }
-    .clink-platform {
-      font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--gray); width: 64px; flex-shrink: 0;
-    }
-    .clink-label { transition: color 0.2s; }
-    .clink-arrow { margin-left: auto; color: var(--gray); }
-    .contact-right {
-      padding: 4rem 2.5rem; background: var(--black); color: var(--white);
-      display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .contact-quote {
-      font-family: var(--display); font-size: 1.4rem; font-style: italic;
-      font-weight: 400; line-height: 1.6; color: #ccc;
-    }
-    .contact-quote strong { color: var(--white); font-weight: 700; font-style: normal; }
-    .contact-issue-big {
-      font-family: var(--display); font-size: clamp(4rem,10vw,8rem); font-weight: 900;
-      line-height: 0.9; color: #1f1f1f; margin-top: 2rem; letter-spacing: -0.04em;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--black); color: var(--white); padding: 1.5rem 2.5rem;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .footer-brand {
-      font-family: var(--display); font-size: 1.1rem; font-weight: 900;
-      letter-spacing: 0.02em; text-transform: uppercase;
-    }
-    .footer-copy { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: #555; }
-    .footer-top {
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #555; text-decoration: none; transition: color 0.2s;
-    }
-    .footer-top:hover { color: var(--accent); }
-
-    @keyframes fadeSlide {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 768px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
-      .posts-grid { grid-template-columns: 1fr; }
-      .post-featured { grid-template-columns: 1fr; }
-      .post-featured-meta { display: none; }
-      .gallery-inner { grid-template-columns: repeat(2, 1fr); }
-      .gallery-wide { grid-column: span 2; }
-      .video-inner { grid-template-columns: 1fr; }
-      .video-sidebar { display: none; }
-      .contact-section { grid-template-columns: 1fr; }
-      .contact-right { display: none; }
-      .masthead-main { grid-template-columns: 1fr; gap: 1rem; }
-      .masthead-right, .masthead-nav { display: none; }
+    @media(max-width:768px){
+      .hero-grid{grid-template-columns:1fr}.hero-card{display:none}
+      .posts-grid{grid-template-columns:1fr}
+      .post-card{border-right:none;border-bottom:1px solid var(--rule)}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
+      .gallery-wide{grid-column:span 2;aspect-ratio:16/9}
+      .video-row{grid-template-columns:1fr}.video-sidebar{display:none}
+      .contact-grid{grid-template-columns:1fr}
+      .post-featured-row{grid-template-columns:1fr}.pfr-meta{display:none}
     }
   </style>
 </head>
 <body>
 
-<!-- ── MASTHEAD ── -->
-<header class="masthead">
-  <div class="masthead-top">
-    <span>个人独立刊物 · 不定期更新</span>
-    <span>2025年 第01期</span>
-    <span>Seattle, WA</span>
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#about" class="nav-logo">
+      <div class="nav-logo-mark">ME</div>
+      你的名字
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">关于</a></li>
+      <li><a href="#projects">项目</a></li>
+      <li><a href="#writing">文章</a></li>
+      <li><a href="#gallery">图纸</a></li>
+      <li><a href="#video">视频</a></li>
+      <li><a href="#contact">联系</a></li>
+    </ul>
   </div>
-  <div class="masthead-main">
-    <nav>
-      <ul class="masthead-nav">
-        <li><a href="#about">关于</a></li>
-        <li><a href="#posts">文章</a></li>
-        <li><a href="#gallery">图辑</a></li>
-        <li><a href="#video">影像</a></li>
-        <li><a href="#contact">联系</a></li>
-      </ul>
-    </nav>
-    <div class="masthead-title">
-      <h1>你的名字</h1>
-      <p class="masthead-subtitle">Personal Journal · Vol. I</p>
-    </div>
-    <div class="masthead-right">
-      <div class="issue-badge">ISSUE<br />No.01<br />2025</div>
-    </div>
-  </div>
-</header>
+</nav>
 
-<!-- ── HERO / ABOUT ── -->
-<section id="about" class="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow">about the author</p>
-    <h2 class="hero-headline">用文字<em>记录</em><br />这个世界<br />与自己</h2>
-    <p class="hero-body">
-      在这里写一段关于自己的介绍。你是谁，你在做什么，你关心什么。
-      可以是一段简短的宣言，也可以是某种生活方式的注解。
-      没有标准答案，只有你自己的声音。
-    </p>
-    <div class="hero-tags">
-      <span class="tag accent">写作</span>
-      <span class="tag">摄影</span>
-      <span class="tag">城市漫步</span>
-      <span class="tag">阅读</span>
-      <span class="tag">电影</span>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-photo">
-      <!--
-        替换照片：删除 hero-photo-ph div，粘贴这行：
-        <img src="images/你的照片.jpg" alt="作者照片"
-          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-      -->
-      <div class="hero-photo-ph">
-        <span>◈</span>
-        <span>上传你的照片</span>
+<!-- ─── HERO / ABOUT ─── -->
+<section id="about" class="section">
+  <div class="sec-label">// 关于</div>
+  <div class="hero-grid">
+    <div>
+      <p class="hero-spec">Mechanical Engineer · 机械工程师</p>
+      <h1 class="hero-name">赵金桥</h1>
+      <p class="hero-role">Senior Mechanical Engineer</p>
+      <p class="hero-bio">
+        机械专业本硕，2020年—2023年2月，在船舶行业做化学品船、LNG船阀门机械工程师；2023年2月—至今转医疗器械做耗材研发工程师。
+      </p>
+      <div class="hero-skills">
+        <span class="skill-tag primary">结构设计</span>
+        <span class="skill-tag primary">有限元分析</span>
+        <span class="skill-tag primary">CAD</span>
+        <span class="skill-tag">SolidWorks</span>
+        <span class="skill-tag">ANSYS/Fluent/ADAMS</span>
+        <span class="skill-tag">公差分析</span>
+        <span class="skill-tag">制造工艺</span>
+        <span class="skill-tag">项目管理</span>
+        <!-- 按你实际技能修改 -->
       </div>
-      <p class="hero-photo-caption">Photo · 2025</p>
     </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">∞</span>
-      <span class="hero-stat-label">Words<br />Written</span>
+
+    <!-- 信息卡片 -->
+    <div class="hero-card">
+      <div class="hcard-row">
+        <span class="hcard-key">工作经验</span>
+        <span class="hcard-val">6 年</span>
+      </div>
+      <div class="hcard-row">
+        <span class="hcard-key">所在城市</span>
+        <span class="hcard-val">上海 </span>
+      </div>
+      <div class="hcard-row">
+        <span class="hcard-key">所在行业</span>
+        <span class="hcard-val">医疗器械</span>
+      </div>
+      <div class="hcard-row">
+        <span class="hcard-key">专业方向</span>
+        <span class="hcard-val">结构 / 密封</span>
+      </div>
+      <div class="hcard-row">
+        <span class="hcard-key">学历</span>
+        <span class="hcard-val">机械设计制造及其自动化 本科/机械设计及理论 硕士</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── WRITING ── -->
-<div class="section-rule" id="posts">
-  <span class="section-rule-label">Writing</span>
-  <span class="section-rule-line"></span>
-  <span class="section-rule-num">§ 01</span>
-</div>
+<!-- ─── PROJECTS ─── -->
+<section id="projects" class="section">
+  <div class="sec-label">// 项目案例</div>
+  <div class="projects-list">
 
-<div class="posts-grid">
+    <!-- 复制此块添加新项目 -->
+    <a href="projects/project-1.html" class="project-item">
+      <div class="proj-index">P-001</div>
+      <div class="proj-body">
+        <p class="proj-cat">结构设计 · 2024</p>
+        <p class="proj-title">某设备传动系统优化设计</p>
+        <p class="proj-desc">项目背景、你解决的核心问题、采用的方法，一两句话说清楚。结果：传动效率提升 X%，噪声降低 X dB。</p>
+        <div class="proj-tags">
+          <span class="proj-tag">SolidWorks</span>
+          <span class="proj-tag">有限元</span>
+          <span class="proj-tag">疲劳分析</span>
+        </div>
+      </div>
+      <div class="proj-meta">
+        2024.06
+        <span>阅读全文 →</span>
+      </div>
+    </a>
+
+    <a href="projects/project-2.html" class="project-item">
+      <div class="proj-index">P-002</div>
+      <div class="proj-body">
+        <p class="proj-cat">工艺改进 · 2023</p>
+        <p class="proj-title">精密零件加工工艺标准化</p>
+        <p class="proj-desc">针对某零件的加工一致性问题，梳理工艺流程，制定检验规范，最终将废品率从 X% 降至 X%。</p>
+        <div class="proj-tags">
+          <span class="proj-tag">公差分析</span>
+          <span class="proj-tag">GD&T</span>
+          <span class="proj-tag">制造工艺</span>
+        </div>
+      </div>
+      <div class="proj-meta">
+        2023.11
+        <span>阅读全文 →</span>
+      </div>
+    </a>
+
+    <a href="projects/project-3.html" class="project-item">
+      <div class="proj-index">P-003</div>
+      <div class="proj-body">
+        <p class="proj-cat">仿真分析 · 2023</p>
+        <p class="proj-title">关键部件热-结构耦合仿真</p>
+        <p class="proj-desc">使用 ANSYS Workbench 对工况下的热变形与应力分布进行耦合仿真，优化冷却通道设计。</p>
+        <div class="proj-tags">
+          <span class="proj-tag">ANSYS</span>
+          <span class="proj-tag">热分析</span>
+          <span class="proj-tag">结构优化</span>
+        </div>
+      </div>
+      <div class="proj-meta">
+        2023.04
+        <span>阅读全文 →</span>
+      </div>
+    </a>
+
+    <!-- 继续添加：复制上方 <a class="project-item"> 块 -->
+  </div>
+</section>
+
+<!-- ─── WRITING ─── -->
+<section id="writing" class="section">
+  <div class="sec-label">// 文章与总结</div>
+
   <!-- 置顶长文 -->
-  <div class="post-featured">
-    <div class="post-featured-body">
-      <span class="post-featured-tag">置顶长文</span>
-      <h3 class="post-featured-title">你最重要的一篇文章，<br />标题可以写得长一些</h3>
-      <p class="post-featured-excerpt">
-        这里是这篇文章的摘要或导语，一两句话，吊起读者的胃口。
-        好的开头决定了别人是否愿意继续读下去。
-      </p>
-      <a href="posts/featured.html" class="post-featured-read">阅读全文 →</a>
+  <div class="post-featured-row">
+    <div class="pfr-body">
+      <span class="pfr-label">置顶</span>
+      <h3 class="pfr-title">你最想让别人读到的一篇文章——可以是某个项目的完整复盘</h3>
+      <p class="pfr-excerpt">这里写摘要，两三句话说清楚文章的核心价值：你遇到了什么难题，怎么思考，最终结论是什么。让读者判断值不值得打开。</p>
+      <a href="posts/featured.html" class="pfr-read">阅读全文 →</a>
     </div>
-    <div class="post-featured-meta">
-      <div class="meta-item">
-        <p class="meta-label">发布时间</p>
-        <p class="meta-value">2025 年 3 月</p>
-      </div>
-      <div class="meta-item">
-        <p class="meta-label">字数</p>
-        <p class="meta-value">约 3,000 字</p>
-      </div>
-      <div class="meta-item">
-        <p class="meta-label">主题</p>
-        <p class="meta-value">随笔 / 生活</p>
-      </div>
+    <div class="pfr-meta">
+      <div class="pfr-meta-item"><p class="mk">类型</p><p class="mv">工程总结</p></div>
+      <div class="pfr-meta-item"><p class="mk">发布</p><p class="mv">2025.03</p></div>
+      <div class="pfr-meta-item"><p class="mk">字数</p><p class="mv">约 3,000 字</p></div>
     </div>
   </div>
 
-  <!-- 文章卡片：复制以下 <a> 块添加更多文章 -->
-  <a href="posts/post-1.html" class="post-card">
-    <p class="post-card-issue">Vol.01 · 2025/01</p>
-    <h3 class="post-card-title">这里是第二篇文章的标题</h3>
-    <p class="post-card-excerpt">一句话摘要，介绍这篇文章讲了什么。</p>
-    <span class="post-card-arrow">↗</span>
-  </a>
+  <!-- 文章卡片三列 -->
+  <div class="posts-grid">
+    <!-- 复制此块添加文章 -->
+    <a href="posts/post-1.html" class="post-card">
+      <p class="post-card-type">技术心得</p>
+      <h3 class="post-card-title">有限元网格划分的几个容易踩的坑</h3>
+      <p class="post-card-excerpt">记录实际工作中遇到的仿真精度问题及解决思路。</p>
+      <p class="post-card-date">2025.01</p>
+      <span class="post-card-arrow">↗</span>
+    </a>
+    <a href="posts/post-2.html" class="post-card">
+      <p class="post-card-type">工作体会</p>
+      <h3 class="post-card-title">如何与制造端高效沟通设计意图</h3>
+      <p class="post-card-excerpt">从工程图纸到车间落地，中间有哪些信息容易丢失？</p>
+      <p class="post-card-date">2024.11</p>
+      <span class="post-card-arrow">↗</span>
+    </a>
+    <a href="posts/post-3.html" class="post-card">
+      <p class="post-card-type">思考</p>
+      <h3 class="post-card-title">机械工程师的成长路径：从执行到判断</h3>
+      <p class="post-card-excerpt">工作 X 年后，对这个职业的一些想法和体会。</p>
+      <p class="post-card-date">2024.09</p>
+      <span class="post-card-arrow">↗</span>
+    </a>
+  </div>
+</section>
 
-  <a href="posts/post-2.html" class="post-card">
-    <p class="post-card-issue">Vol.01 · 2024/11</p>
-    <h3 class="post-card-title">旅行笔记：某座城市的冬天</h3>
-    <p class="post-card-excerpt">关于一次旅程的所见所想，以及那些说不清楚的感受。</p>
-    <span class="post-card-arrow">↗</span>
-  </a>
+<!-- ─── GALLERY ─── -->
+<section id="gallery" class="section">
+  <div class="sec-label">// 图纸 · 图片 · 模型</div>
+  <div class="gallery-grid">
 
-  <a href="posts/post-3.html" class="post-card">
-    <p class="post-card-issue">Vol.01 · 2024/09</p>
-    <h3 class="post-card-title">关于阅读这件事本身</h3>
-    <p class="post-card-excerpt">我们读书是为了什么？记录，逃离，还是找到另一个自己？</p>
-    <span class="post-card-arrow">↗</span>
-  </a>
-</div>
-
-<!-- ── GALLERY ── -->
-<div class="section-rule" id="gallery">
-  <span class="section-rule-label">Gallery</span>
-  <span class="section-rule-line"></span>
-  <span class="section-rule-num">§ 02</span>
-</div>
-
-<div class="gallery-section">
-  <div class="gallery-inner">
-    <!--
-      替换图片：将 <div class="gallery-cell-ph">...</div> 替换为：
-      <img src="images/文件名.jpg" alt="描述">
-    -->
+    <!-- 替换图片：把 <div class="gallery-ph">...</div> 换成 <img src="../images/文件名.jpg" alt="描述"> -->
     <div class="gallery-cell gallery-wide">
-      <div class="gallery-cell-ph"><span class="ph-icon">▦</span><span>宽幅图片</span></div>
-      <span class="gallery-cell-num">01</span>
+      <div class="gallery-ph">
+        <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>宽幅图 — 工程图纸 / 整机照片</span>
+      </div>
+      <span class="gallery-num">01</span>
     </div>
+
     <div class="gallery-cell">
-      <div class="gallery-cell-ph"><span class="ph-icon">◻</span><span>图片</span></div>
-      <span class="gallery-cell-num">02</span>
+      <div class="gallery-ph">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>零件图</span>
+      </div>
+      <span class="gallery-num">02</span>
     </div>
+
     <div class="gallery-cell">
-      <div class="gallery-cell-ph"><span class="ph-icon">◻</span><span>图片</span></div>
-      <span class="gallery-cell-num">03</span>
+      <div class="gallery-ph">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>3D 截图</span>
+      </div>
+      <span class="gallery-num">03</span>
     </div>
+
     <div class="gallery-cell">
-      <div class="gallery-cell-ph"><span class="ph-icon">◻</span><span>图片</span></div>
-      <span class="gallery-cell-num">04</span>
+      <div class="gallery-ph">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>现场照片</span>
+      </div>
+      <span class="gallery-num">04</span>
     </div>
+
     <div class="gallery-cell">
-      <div class="gallery-cell-ph"><span class="ph-icon">◻</span><span>图片</span></div>
-      <span class="gallery-cell-num">05</span>
+      <div class="gallery-ph">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>仿真云图</span>
+      </div>
+      <span class="gallery-num">05</span>
     </div>
+
     <div class="gallery-cell gallery-wide">
-      <div class="gallery-cell-ph"><span class="ph-icon">▦</span><span>宽幅图片</span></div>
-      <span class="gallery-cell-num">06</span>
+      <div class="gallery-ph">
+        <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>宽幅图 — 装配图 / 分析结果</span>
+      </div>
+      <span class="gallery-num">06</span>
     </div>
   </div>
-</div>
+  <p class="gallery-note">
+    将图片上传到仓库 images/ 文件夹，替换占位块为 &lt;img src="images/文件名.jpg" alt="描述"&gt; 即可
+  </p>
+</section>
 
-<!-- ── VIDEO ── -->
-<div class="section-rule" id="video">
-  <span class="section-rule-label">Video</span>
-  <span class="section-rule-line"></span>
-  <span class="section-rule-num">§ 03</span>
-</div>
-
-<div class="video-section">
-  <div class="video-inner">
+<!-- ─── VIDEO ─── -->
+<section id="video" class="section">
+  <div class="sec-label">// 视频记录</div>
+  <div class="video-row">
     <div class="video-main">
-      <div class="video-embed-wrap">
+      <div class="video-embed">
         <!--
-          B站嵌入：替换整个 video-embed-ph div 为：
+          嵌入 B站视频：将整个 .video-ph div 替换为：
           <iframe src="https://player.bilibili.com/player.html?bvid=你的BV号&high_quality=1"
-            scrolling="no" frameborder="0" allowfullscreen></iframe>
+            scrolling="no" allowfullscreen></iframe>
 
-          YouTube嵌入：
-          <iframe src="https://www.youtube.com/embed/你的视频ID"
-            frameborder="0" allowfullscreen></iframe>
+          嵌入 YouTube：
+          <iframe src="https://www.youtube.com/embed/你的视频ID" allowfullscreen></iframe>
         -->
-        <div class="video-embed-ph">
-          <div class="play-circle">▶</div>
+        <div class="video-ph">
+          <div class="video-ph-play">▶</div>
           <p>粘贴 B站 / YouTube 嵌入代码</p>
         </div>
       </div>
-      <h3 class="video-main-title">第一个视频的标题写在这里</h3>
-      <p class="video-main-meta">2025 · 03 &nbsp;·&nbsp; 时长 12:34 &nbsp;·&nbsp; 生活记录</p>
+      <p class="video-title">实验过程记录 / 设备调试现场</p>
+      <p class="video-meta-txt">2025.03 · 时长 08:24 · 实验记录</p>
     </div>
-
     <div class="video-sidebar">
       <div class="video-side-item">
-        <p class="video-side-num">No. 02</p>
-        <p class="video-side-title">第二个视频的标题，可以稍长</p>
-        <p class="video-side-date">2025 · 01</p>
+        <p class="vsi-num">V-02</p>
+        <p class="vsi-title">某设备装配过程记录</p>
+        <p class="vsi-date">2025.01</p>
       </div>
       <div class="video-side-item">
-        <p class="video-side-num">No. 03</p>
-        <p class="video-side-title">第三个视频：旅行途中拍的片段</p>
-        <p class="video-side-date">2024 · 11</p>
+        <p class="vsi-num">V-03</p>
+        <p class="vsi-title">振动测试数据采集过程</p>
+        <p class="vsi-date">2024.10</p>
       </div>
       <div class="video-side-item">
-        <p class="video-side-num">No. 04</p>
-        <p class="video-side-title">一次随手拍，后来剪成了短片</p>
-        <p class="video-side-date">2024 · 09</p>
+        <p class="vsi-num">V-04</p>
+        <p class="vsi-title">CAD 建模演示：复杂曲面处理</p>
+        <p class="vsi-date">2024.07</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ── CONTACT ── -->
-<div class="section-rule" id="contact">
-  <span class="section-rule-label">Contact</span>
-  <span class="section-rule-line"></span>
-  <span class="section-rule-num">§ 04</span>
-</div>
+<!-- ─── CONTACT ─── -->
+<section id="contact" class="section">
+  <div class="sec-label">// 联系</div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-intro">
+        如果你是同行，欢迎交流工程问题；如果有合作或咨询需求，可以通过以下方式联系我。
+      </p>
+      <div class="contact-links">
+        <a href="mailto:you@example.com" class="contact-link">
+          <span class="cl-platform">Email</span>
+          <span class="cl-label">you@example.com</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a href="https://github.com/你的用户名" class="contact-link" target="_blank" rel="noopener">
+          <span class="cl-platform">GitHub</span>
+          <span class="cl-label">github.com/你的用户名</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a href="https://linkedin.com/in/你的主页" class="contact-link" target="_blank" rel="noopener">
+          <span class="cl-platform">LinkedIn</span>
+          <span class="cl-label">linkedin.com/in/你的主页</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a href="https://weibo.com/你" class="contact-link" target="_blank" rel="noopener">
+          <span class="cl-platform">微博</span>
+          <span class="cl-label">@你的微博</span>
+          <span class="cl-arrow">→</span>
+        </a>
+      </div>
+    </div>
 
-<div class="contact-section">
-  <div class="contact-left">
-    <h2 class="contact-heading">来找我<br />聊聊。</h2>
-    <div class="contact-links">
-      <a href="mailto:you@example.com" class="contact-link">
-        <span class="clink-platform">email</span>
-        <span class="clink-label">you@example.com</span>
-        <span class="clink-arrow">→</span>
-      </a>
-      <a href="https://github.com/你的用户名" class="contact-link" target="_blank" rel="noopener">
-        <span class="clink-platform">github</span>
-        <span class="clink-label">@你的用户名</span>
-        <span class="clink-arrow">→</span>
-      </a>
-      <a href="https://weibo.com/你的主页" class="contact-link" target="_blank" rel="noopener">
-        <span class="clink-platform">weibo</span>
-        <span class="clink-label">@你的微博昵称</span>
-        <span class="clink-arrow">→</span>
-      </a>
-      <a href="https://twitter.com/你的用户名" class="contact-link" target="_blank" rel="noopener">
-        <span class="clink-platform">twitter / x</span>
-        <span class="clink-label">@你的用户名</span>
-        <span class="clink-arrow">→</span>
-      </a>
+    <!-- 个人规格卡 -->
+    <div class="spec-block">
+      <p class="spec-title">个人规格 · Personal Spec</p>
+      <div class="spec-row"><span class="spec-k">职位</span><span class="spec-v">高级机械工程师</span></div>
+      <div class="spec-row"><span class="spec-k">专业</span><span class="spec-v">机械工程 · 本科</span></div>
+      <div class="spec-row"><span class="spec-k">软件</span><span class="spec-v">SW / ANSYS / AutoCAD</span></div>
+      <div class="spec-row"><span class="spec-k">语言</span><span class="spec-v">中文 · 英文（读写）</span></div>
+      <div class="spec-row"><span class="spec-k">状态</span><span class="spec-v ok">在职 · 欢迎交流</span></div>
     </div>
   </div>
-  <div class="contact-right">
-    <p class="contact-quote">
-      "写作是<strong>对抗遗忘</strong>唯一体面的方式。"
-    </p>
-    <div class="contact-issue-big">01</div>
-  </div>
-</div>
+</section>
 
-<!-- ── FOOTER ── -->
+<!-- ─── FOOTER ─── */
 <footer>
-  <span class="footer-brand">你的名字</span>
-  <span class="footer-copy">© 2025 · 保留所有权利</span>
-  <a href="#" class="footer-top">↑ Top</a>
+  <span class="footer-id">© 2025 你的名字 · Mechanical Engineer</span>
+  <a href="#about" class="footer-back">↑ Back to top</a>
 </footer>
 
 </body>
